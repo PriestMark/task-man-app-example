@@ -9,13 +9,14 @@ import { configValidationSchema } from 'config.schema';
   imports: [
     ConfigModule.forRoot({
       envFilePath: [`.env.stage.${process.env.STAGE}`],
+      validationSchema: configValidationSchema,
     }),
     TasksModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      inject: [ConfigService, configValidationSchema],
+      inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        console.log(configService.get('DB_HOST'));
+        // console.log(configService.get('DB_HOST'));
         return {
           type: 'postgres',
           autoLoadEntities: true,

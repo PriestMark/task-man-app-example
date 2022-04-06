@@ -8,6 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
+  // app.enableCors({ origin: process.env.ALLOW_LIST, optionsSuccessStatus: 200 });
   const port = 3000;
   await app.listen(port);
   logger.log(`Application listnenig on port ${port}`);
